@@ -1,0 +1,1491 @@
+{
+	"info": {
+		"_postman_id": "90b50aca-dd1e-4acf-8106-4094853268d5",
+		"name": "Seller Portal2b - API - Testes",
+		"description": "<p>API Seller Portal2b utiliza códigos de resposta HTTP padrão para indicar se um método foi concluído com êxito. \nOs códigos de resposta HTTP na faixa 2xx indicam sucesso. Uma resposta na faixa 4xx é algum tipo de falha, \ne uma resposta na faixa 5xx geralmente indica um erro interno do sistema que não pode ser resolvido pelo usuário.</p>\n<a href=\"/api/postman\" target=\"_blank\">Postman Collection</a>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7516209"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "1. Criar Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"_agriconnection@gmail.com\",\n    \"password\": \"admin@seller2021\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						},
+						"description": "Emite um novo token fixo, e revoga o token já existente, caso o usuário já possua um. Este token pode ser utilizado ​​para autenticar solicitações de API. Ao fazer requisições, o token deve ser incluído no `Authorization` cabeçalho como um `Bearer` token."
+					},
+					"response": [
+						{
+							"name": "201 - Criar Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"exemplo@gmail.com\",\n    \"password\": \"senhaExemplo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"access_token\": \"1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg\",\n \"token_type\": \"Bearer\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Autenticação via token."
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "1. Listar Pedidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						},
+						"description": "<h3>Parâmetros</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>status_code</b><br>string</td><td>Filtra os pedidos pelo código de identificação do status.</td><td>Acessivel em <a href=\"/api/order/status\">/api/order/status</a>.</td></tr></tbody></table><h3>Resposta</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>total</b><br>integer</td><td>Total de pedidos retornados na consulta.</td><td></td></tr><tr><td><b>data</b><br>Pedido[]</td><td>Lista de pedidos.</td><td></td></tr></tbody></table><h4>Pedido</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do pedido.</td><td></td></tr><tr><td><b>order_number</b><br>integer</td><td>Número do pedido.</td><td></td></tr><tr><td><b>comment</b><br>string</td><td>Comentário do pedido.</td><td></td></tr><tr><td><b>date_modified</b><br>string</td><td>Data da última modificação do pedido.</td><td>2021-10-15 15:47:00</td></tr><tr><td><b>status_code</b><br>string</td><td>Código do status do pedido.</td><td>cod2</td></tr><tr><td><b>status_label</b><br>string</td><td>Nome do status do pedido.</td><td></td></tr><tr><td><b>id_quotation</b><br>integer</td><td>Identificador da cotação.</td><td></td></tr><tr><td><b>quotation_external_co</b><br>string</td><td>Código da cotação.</td><td></td></tr><tr><td><b>customer_name</b><br>string</td><td>Nome do cliente.</td><td></td></tr><tr><td><b>customer_cnpj</b><br>string</td><td>CNPJ do cliente.</td><td></td></tr><tr><td><b>address</b><br>string</td><td>Endereço para o pedido.</td><td></td></tr><tr><td><b>currency</b><br>string</td><td>Moeda</td><td></td></tr><tr><td><b>form_payment</b><br>string</td><td>Forma de pagamento.</td><td><ul><li><p>À vista</p></li><li><p>Prazo Safra (30/04)</p></li><li><p>Prazo Safrinha (30/08)</p></li></ul></td></tr><tr><td><b>payment_preferential</b><br>string</td><td>Forma de pagamento preferencial.</td><td><ul><li><p>À vista</p></li><li><p>Prazo Safra (30/04)</p></li><li><p>Prazo Safrinha (30/08)</p></li></ul></td></tr><tr><td><b>crop</b><br>string</td><td>Cultura.</td><td><ul><li><p>Algodão</p></li><li><p>Arroz Irrigado</p></li><li><p>Café</p></li><li><p>Cana-de-açúcar</p></li><li><p>Citrus</p></li><li><p>Feijão</p></li><li><p>H&amp;F</p></li><li><p>Milho Safrinha</p></li><li><p>Milho Verão</p></li><li><p>Soja</p></li><li><p>Trigo</p></li></ul></td></tr><tr><td><b>harvest</b><br>string</td><td>Safra.</td><td></td></tr><tr><td><b>date_payment</b><br>string</td><td>Data de pagamento.</td><td>2021-10-22</td></tr><tr><td><b>date_delivery</b><br>string</td><td>Data de entrega.</td><td>2021-10-24</td></tr><tr><td><b>products</b><br>Produto[]</td><td>Lista de produtos do pedido.</td><td></td></tr></tbody></table><h4>Produto</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do produto.</td><td></td></tr><tr><td><b>id_quotation</b><br>integer</td><td>Identificador da cotação.</td><td></td></tr><tr><td><b>sku</b><br>string</td><td>SKU do produto.</td><td></td></tr><tr><td><b>quantity</b><br>integer</td><td>Quantidade do produto no pedido.</td><td></td></tr><tr><td><b>price</b><br>float</td><td>Preço negociado para o produto.</td><td></td></tr><tr><td><b>quote_product_status</b><br>string</td><td>Código do status de produto do pedido.</td><td>cod2</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Listar Pedidos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Token de segurança fornecido pelo sistema.",
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2,\n    \"data\": [\n        {\n            \"id\": 28,\n            \"order_number\": 273,\n            \"comment\": \"Comentário pedido.\",\n            \"date_modified\": \"2021-10-15 23:47:00\",\n            \"status_code\": \"cod2\",\n            \"status_label\": \"Em análise - Cadastro/Crédito\",\n            \"id_quotation\": 87,\n            \"quotation_external_code\": \"211016457\",\n            \"customer_name\": \"Nulla tempus\",\n            \"customer_cnpj\": \"02.299.686/0001-99\",\n            \"address\": \"Will Treaty, Rua SF 27, Palmas, Tocantins, Brasil\",\n            \"currency\": \"BRL\",\n            \"form_payment\": \"Prazo Safrinha (30/08)\",\n            \"payment_preferential\": \"À vista\",\n            \"crop\": \"Café\",\n            \"harvest\": \"Safra 21/22\",\n            \"date_payment\": \"2021-10-24\",\n            \"date_delivery\": \"2021-10-23\",\n            \"products\": [\n                {\n                    \"id\": 147,\n                    \"id_quotation\": 87,\n                    \"sku\": \"1.2.003\",\n                    \"quantity\": 1,\n                    \"price\": 100.09,\n                    \"quote_product_status\": \"cod3\"\n                }\n            ]\n        },\n        {\n            \"id\": 23,\n            \"order_number\": 259,\n            \"comment\": \"Comentário pedido.\",\n            \"date_modified\": \"2021-10-15 14:26:01\",\n            \"status_code\": \"cod3\",\n            \"status_label\": \"Em análise - Cadastro/Crédito\",\n            \"id_quotation\": 73,\n            \"quotation_external_code\": \"211015442\",\n            \"customer_name\": \"Cras interdum\",\n            \"customer_cnpj\": \"53.458.537/0001-66\",\n            \"address\": \"Halt Carrick, Travessa São Pedro 27, Santa Maria, Rio Grande do Sul, Brasil\",\n            \"currency\": \"BRL\",\n            \"form_payment\": \"À vista\",\n            \"payment_preferential\": \"À vista\",\n            \"crop\": \"Soja\",\n            \"harvest\": \"Safra 21/22\",\n            \"date_payment\": \"2021-10-20\",\n            \"date_delivery\": \"2021-10-20\",\n            \"products\": [\n                {\n                    \"id\": 132,\n                    \"id_quotation\": 73,\n                    \"sku\": \"1.1.001\",\n                    \"quantity\": 150,\n                    \"price\": 99,\n                    \"quote_product_status\": null\n                },\n                {\n                    \"id\": 133,\n                    \"id_quotation\": 73,\n                    \"sku\": \"1.2.001\",\n                    \"quantity\": 37,\n                    \"price\": 400,\n                    \"quote_product_status\": null\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "200 - Filtrar Pedidos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Token de segurança fornecido pelo sistema.",
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order?status_code=cod2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order"
+									],
+									"query": [
+										{
+											"key": "status_code",
+											"value": "cod2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 1,\n    \"data\": [\n        [\n            {\n                \"id\": 28,\n                \"order_number\": 273,\n                \"comment\": \"Comentário pedido.\",\n                \"date_modified\": \"2021-10-15 23:47:00\",\n                \"status_code\": \"cod2\",\n                \"status_label\": \"Em análise - Cadastro/Crédito\",\n                \"id_quotation\": 87,\n                \"quotation_external_code\": \"211016457\",\n                \"customer_name\": \"Nulla tempus\",\n                \"customer_cnpj\": \"02.299.686/0001-99\",\n                \"address\": \"Will Treaty, Rua SF 27, Palmas, Tocantins, Brasil\",\n                \"currency\": \"BRL\",\n                \"form_payment\": \"Prazo Safrinha (30/08)\",\n                \"payment_preferential\": \"À vista\",\n                \"crop\": \"Café\",\n                \"harvest\": \"Safra 21/22\",\n                \"date_payment\": \"2021-10-24\",\n                \"date_delivery\": \"2021-10-23\",\n                \"products\": [\n                    {\n                        \"id\": 147,\n                        \"id_quotation\": 87,\n                        \"sku\": \"1.2.003\",\n                        \"quantity\": 1,\n                        \"price\": 100.09,\n                        \"quote_product_status\": \"cod3\"\n                    }\n                ]\n            }\n        ]\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "2. Obter Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "36",
+									"description": "Identificador único do pedido."
+								}
+							]
+						},
+						"description": "<h3>Resposta</h3><h4>Pedido</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do pedido.</td><td></td></tr><tr><td><b>order_number</b><br>integer</td><td>Número do pedido.</td><td></td></tr><tr><td><b>comment</b><br>string</td><td>Comentário do pedido.</td><td></td></tr><tr><td><b>date_modified</b><br>string</td><td>Data da última modificação do pedido.</td><td>2021-10-15 15:47:00</td></tr><tr><td><b>status_code</b><br>string</td><td>Código do status do pedido.</td><td>cod2</td></tr><tr><td><b>status_label</b><br>string</td><td>Nome do status do pedido.</td><td></td></tr><tr><td><b>id_quotation</b><br>integer</td><td>Identificador da cotação.</td><td></td></tr><tr><td><b>quotation_external_co</b><br>string</td><td>Código da cotação.</td><td></td></tr><tr><td><b>customer_name</b><br>string</td><td>Nome do cliente.</td><td></td></tr><tr><td><b>customer_cnpj</b><br>string</td><td>CNPJ do cliente.</td><td></td></tr><tr><td><b>address</b><br>string</td><td>Endereço para o pedido.</td><td></td></tr><tr><td><b>currency</b><br>string</td><td>Moeda</td><td></td></tr><tr><td><b>form_payment</b><br>string</td><td>Forma de pagamento.</td><td><ul><li><p>À vista</p></li><li><p>Prazo Safra (30/04)</p></li><li><p>Prazo Safrinha (30/08)</p></li></ul></td></tr><tr><td><b>payment_preferential</b><br>string</td><td>Forma de pagamento preferencial.</td><td><ul><li><p>À vista</p></li><li><p>Prazo Safra (30/04)</p></li><li><p>Prazo Safrinha (30/08)</p></li></ul></td></tr><tr><td><b>crop</b><br>string</td><td>Cultura.</td><td><ul><li><p>Algodão</p></li><li><p>Arroz Irrigado</p></li><li><p>Café</p></li><li><p>Cana-de-açúcar</p></li><li><p>Citrus</p></li><li><p>Feijão</p></li><li><p>H&amp;F</p></li><li><p>Milho Safrinha</p></li><li><p>Milho Verão</p></li><li><p>Soja</p></li><li><p>Trigo</p></li></ul></td></tr><tr><td><b>harvest</b><br>string</td><td>Safra.</td><td></td></tr><tr><td><b>date_payment</b><br>string</td><td>Data de pagamento.</td><td>2021-10-22</td></tr><tr><td><b>date_delivery</b><br>string</td><td>Data de entrega.</td><td>2021-10-24</td></tr><tr><td><b>products</b><br>Produto[]</td><td>Lista de produtos do pedido.</td><td></td></tr></tbody></table><h4>Produto</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do produto.</td><td></td></tr><tr><td><b>id_quotation</b><br>integer</td><td>Identificador da cotação.</td><td></td></tr><tr><td><b>sku</b><br>string</td><td>SKU do produto.</td><td></td></tr><tr><td><b>quantity</b><br>integer</td><td>Quantidade do produto no pedido.</td><td></td></tr><tr><td><b>price</b><br>float</td><td>Preço negociado para o produto.</td><td></td></tr><tr><td><b>quote_product_status</b><br>string</td><td>Código do status de produto do pedido.</td><td>cod2</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Obter Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Token de segurança fornecido pelo sistema.",
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "28",
+											"description": "Identificador único do pedido."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 28,\n    \"order_number\": 273,\n    \"comment\": \"Comentário pedido.\",\n    \"date_modified\": \"2021-10-15 23:47:00\",\n    \"status_code\": \"cod2\",\n    \"status_label\": \"Em análise - Cadastro/Crédito\",\n    \"id_quotation\": 87,\n    \"quotation_external_code\": \"211016457\",\n    \"customer_name\": \"Nulla tempus\",\n    \"customer_cnpj\": \"02.299.686/0001-99\",\n    \"address\": \"Will Treaty, Rua SF 27, Palmas, Tocantins, Brasil\",\n    \"currency\": \"BRL\",\n    \"form_payment\": \"Prazo Safrinha (30/08)\",\n    \"payment_preferential\": \"À vista\",\n    \"crop\": \"Café\",\n    \"harvest\": \"Safra 21/22\",\n    \"date_payment\": \"2021-10-24\",\n    \"date_delivery\": \"2021-10-23\",\n    \"products\": [\n        {\n            \"id\": 147,\n            \"id_quotation\": 87,\n            \"sku\": \"1.2.003\",\n            \"quantity\": 1,\n            \"price\": 100.09,\n            \"quote_product_status\": \"cod3\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "3. Editar Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status_code\": \"cod4\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "36",
+									"description": "Identificador único do pedido."
+								}
+							]
+						},
+						"description": "<h3>Body</h3><p><br><br></p><p><br><br><br></p><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>status_code</b><br>string</td><td>Código para o novo status do pedido.</td><td>Acessivel em <a href=\"/api/order/status\">/api/order/status</a>.<br><br>Não permitido a atualização para os status `cod1 - Cadastro` e `cod4 - Finalizado`.<br>Pedidos com o status `cod3 - Em Preparação` tem seu status controlado pelos status do produto.<br></td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Editar Pedido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Token de segurança fornecido pelo sistema.",
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status_code\": \"cod3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "28",
+											"description": "Identificador único do pedido."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "4. Listar Produtos Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:order_id/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":order_id",
+								"products"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "399",
+									"description": "Identificador único do pedido."
+								}
+							]
+						},
+						"description": "<h3>Parâmetros</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>sku</b><br>string</td><td>Filtra os produtos pelo código sku.</td><td></td></tr><tr><td><b>quote_product_status</b><br>string</td><td>Filtra os produtos pelo código de identificação do status.</td><td>Acessivel em <a href=\"/order/products/status\">/order/products/status</a>.</td></tr></tbody></table><h3>Resposta</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>total</b><br>integer</td><td>Total de produtos retornados na consulta.</td><td></td></tr><tr><td><b>data</b><br>Produtos[]</td><td>Lista de produtos.</td><td></td></tr></tbody></table><h4>Produtos</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do produto.</td><td></td></tr><tr><td><b>sku</b><br>string</td><td>Código Unidade de Manutenção de Estoque.</td><td></td></tr><tr><td><b>name</b><br>string</td><td>Nome do produto.</td><td></td></tr><tr><td><b>description</b><br>string</td><td>Descrição do produto.</td><td></td></tr><tr><td><b>brand</b><br>string</td><td>Marca do produto.</td><td></td></tr><tr><td><b>measurement_unit</b><br>string</td><td>Unidade de medida utilizada para o produto.</td><td><ul><li><p>L</p></li><li><p>cm</p></li><li><p>g</p></li><li><p>in</p></li><li><p>kg</p></li><li><p>lb</p></li><li><p>m</p></li><li><p>ml</p></li><li><p>mm</p></li><li><p>oz</p></li></ul></td></tr><tr><td><b>weight</b><br>float</td><td>Volume do produto, baseado na unidade de medida.</td><td></td></tr><tr><td><b>price</b><br>float</td><td>Preço do produto negociado na cotação.</td><td></td></tr><tr><td><b>quantity</b><br>integer</td><td>Quantidade solicitada na cotação.</td><td></td></tr><tr><td><b>industry</b><br>string</td><td>Indústria.</td><td></td></tr><tr><td><b>quote_product_status</b><br>string</td><td>Código do status de produto do pedido.</td><td>cod2</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Listar Produtos Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg",
+										"description": "Token de segurança fornecido pelo sistema.",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"products"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "23",
+											"description": "Identificador único do pedido."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 16 Nov 2021 20:17:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1777"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2,\n    \"data\": [\n        {\n            \"id\": 132,\n            \"sku\": \"1.1.001\",\n            \"name\": \"Lorem ipsum\",\n            \"description\": \"Dolor sit amet, consectetur adipiscing elit.\",\n            \"brand\": \"Vivamus\",\n            \"measurement_unit\": \"L\",\n            \"weight\": 20.0000,\n            \"price\": 99,\n            \"quantity\": 150,\n            \"industry\": \"Vivamus\",\n            \"quote_product_status\": \"cod3\"\n        },\n        {\n            \"id\": 133,\n            \"sku\": \"1.2.001\",\n            \"name\": \"Donec fermentum\",\n            \"description\": \"Nisl pellentesque nulla blandit suscipit.\",\n            \"brand\": \"Quisque\",\n            \"measurement_unit\": \"kg\",\n            \"weight\": 0.0144,\n            \"price\": 400,\n            \"quantity\": 37,\n            \"industry\": \"Quisque\",\n            \"quote_product_status\": \"cod3\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "200 - Filtrar Produtos Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg",
+										"description": "Token de segurança fornecido pelo sistema.",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/products?sku=1.2.001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"products"
+									],
+									"query": [
+										{
+											"key": "sku",
+											"value": "1.2.001",
+											"description": "Sku do produto."
+										}
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "23",
+											"description": "Identificador único do pedido."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 16 Nov 2021 20:19:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "929"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 1,\n    \"data\": [\n        {\n            \"id\": 133,\n            \"sku\": \"1.2.001\",\n            \"name\": \"Donec fermentum\",\n            \"description\": \"Nisl pellentesque nulla blandit suscipit.\",\n            \"brand\": \"Quisque\",\n            \"measurement_unit\": \"kg\",\n            \"weight\": 0.0144,\n            \"price\": 400,\n            \"quantity\": 37,\n            \"industry\": \"Quisque\",\n            \"quote_product_status\": \"cod3\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "5. Obter Produtos Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:order_id/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":order_id",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "51",
+									"description": "Identificador único do pedido."
+								},
+								{
+									"key": "id",
+									"value": "324",
+									"description": "Identificador único do produto."
+								}
+							]
+						},
+						"description": "<h3>Resposta</h3><h4>Produtos</h4><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>id</b><br>integer</td><td>Identificador único do produto.</td><td></td></tr><tr><td><b>sku</b><br>string</td><td>Código Unidade de Manutenção de Estoque.</td><td></td></tr><tr><td><b>name</b><br>string</td><td>Nome do produto.</td><td></td></tr><tr><td><b>description</b><br>string</td><td>Descrição do produto.</td><td></td></tr><tr><td><b>brand</b><br>string</td><td>Marca do produto.</td><td></td></tr><tr><td><b>measurement_unit</b><br>string</td><td>Unidade de medida utilizada para o produto.</td><td><ul><li><p>L</p></li><li><p>cm</p></li><li><p>g</p></li><li><p>in</p></li><li><p>kg</p></li><li><p>lb</p></li><li><p>m</p></li><li><p>ml</p></li><li><p>mm</p></li><li><p>oz</p></li></ul></td></tr><tr><td><b>weight</b><br>float</td><td>Volume do produto, baseado na unidade de medida.</td><td></td></tr><tr><td><b>price</b><br>float</td><td>Preço do produto negociado na cotação.</td><td></td></tr><tr><td><b>quantity</b><br>integer</td><td>Quantidade solicitada na cotação.</td><td></td></tr><tr><td><b>industry</b><br>string</td><td>Indústria.</td><td></td></tr><tr><td><b>quote_product_status</b><br>string</td><td>Código do status de produto do pedido.</td><td>cod2</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Obter  Produtos Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg",
+										"description": "Token de segurança fornecido pelo sistema.",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/products/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "23",
+											"description": "Identificador único do pedido."
+										},
+										{
+											"key": "id",
+											"value": "133",
+											"description": "Identificador único do produto."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 16 Nov 2021 20:17:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1777"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 133,\n    \"sku\": \"1.2.001\",\n    \"product\": \"Donec fermentum\",\n    \"description\": \"Nisl pellentesque nulla blandit suscipit.\",\n    \"brand\": \"Quisque\",\n    \"measurement_unit\": \"kg\",\n    \"weight\": 0.0144,\n    \"price\": 400,\n    \"quantity\": 37,\n    \"industry\": \"Quisque\",\n    \"quote_product_status\": \"cod3\"\n}"
+						}
+					]
+				},
+				{
+					"name": "6. Editar Produtos Pedido",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"quote_product_id\": 244,\n        \"quote_product_status\": \"cod1\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:order_id/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":order_id",
+								"products"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "36",
+									"description": "Identificador único do produto."
+								}
+							]
+						},
+						"description": "<h3>Body</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>quote_product_id</b><br>integer</td><td>Identificador único do produto.</td><td></td></tr><tr><td>quote_product_status<br>string</td><td>Código para o novo status de produto do pedido.</td><td>Acessivel em <a href=\"/order/products/status\">/order/products/status</a></td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Editar Produtos Pedido",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"quote_product_id\": 133,\n        \"quote_product_status\": \"cod4\"\n    }\n]\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"products"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "28",
+											"description": "Identificador único do produto."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 16 Dec 2021 18:41:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "7. Dividir Produto Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_quantity\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:order_id/products/:id/split",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":order_id",
+								"products",
+								":id",
+								"split"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "36",
+									"description": "Identificador único do pedido."
+								},
+								{
+									"key": "id",
+									"value": "195",
+									"description": "Identificador único do produto."
+								}
+							]
+						},
+						"description": "<h3>Body</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>new_quantity</b><br>integer</td><td>Quantidade que o novo produto do pedido vai receber.<br>Este valor será subtraído do produto já existente.</td><td></td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "201 - Dividir Produto Pedido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"new_quantity\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/products/:id/split",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"products",
+										":id",
+										"split"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "51",
+											"description": "Identificador único do pedido."
+										},
+										{
+											"key": "id",
+											"value": "324",
+											"description": "Identificador único do produto."
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 16 Dec 2021 18:03:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "239"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 329,\n    \"id_quotation\": 210,\n    \"sku\": \"1.1.014\",\n    \"industry\": \"AgriConnection\",\n    \"price\": 200,\n    \"quote_product_status\": null,\n    \"quotation_product_id\": 324,\n    \"quantity\": 4,\n    \"created_at\": \"2021-12-16T18:03:48.000000Z\",\n    \"updated_at\": \"2021-12-16T18:03:48.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "8. Cadastrar Danfe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"industry_cnpj\": \"66.623.550/0001-75\",\r\n    \"industry_name\": \"Vitae Egestas\",\r\n    \"partner_cnpj\": \"68.461.696/0001-97\",\r\n    \"partner_name\": \"Nullam Faucibus\",\r\n    \"order_registration_date\": \"2021-11-17 00:00:00\",\r\n    \"nf_emission_date\": \"2021-11-17 00:00:00\",\r\n    \"billing_date\": \"2021-11-17 00:00:00\",\r\n    \"order_number\": \"23113\",\r\n    \"nf_number\": \"000.001\",\r\n    \"freight\": 234.00,\r\n    \"discount\": 10.0,\r\n    \"danfe_xml\": \"<xml></xml>\",\r\n    \"danfe_products\": [\r\n        {\r\n            \"sku\": \"1.1.001\",\r\n            \"ean\": \"3246548542131\",\r\n            \"dun\": \"26265132132132\",\r\n            \"description\": \"Cras vulputate ipsum et mauris sollicitudin.\",\r\n            \"brand\": \"Curabitur\",\r\n            \"requested_quantity\": 2,\r\n            \"billing_quantity\": 2,\r\n            \"unitary_price\": 50,\r\n            \"billing_unitary_price\": 50,\r\n            \"discount_requested\": 0,\r\n            \"billing_discount\": 0\r\n        },\r\n        {\r\n            \"sku\": \"2.2.002\",\r\n            \"ean\": \"1234651313258\",\r\n            \"dun\": \"13212345615230\",\r\n            \"description\": \"Donec semper, metus et dictum.\",\r\n            \"brand\": \"Cras\",\r\n            \"requested_quantity\": 1,\r\n            \"billing_quantity\": 1,\r\n            \"unitary_price\": 134,\r\n            \"billing_unitary_price\": 134,\r\n            \"discount_requested\": 0,\r\n            \"billing_discount\": 0\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/order/:order_id/danfe",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								":order_id",
+								"danfe"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "23",
+									"description": "Identificador único do pedido."
+								}
+							]
+						},
+						"description": "<h3>Body</h3>\n\n<h4>DANFE</h4>\n<table class=\"table table-hover\">\n    <thead>\n        <tr>\n            <th>Nome</th>\n            <th>Descrição</th>\n            <th>Exemplo</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td><b>industry_cnpj</b> <br/>string</td>\n            <td>CNPJ da indústria.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>industry_name</b> <br/>string</td>\n            <td>Nome da indústria.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>partner_cnpj</b> <br/>string</td>\n            <td>CNPJ do distribuidor.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>partner_name</b> <br/>string</td>\n            <td>Nome do distribuidor.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>order_registration_date</b> <br/>string</td>\n            <td>Data de cadastro do pedido.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>nf_emission_date</b> <br/>string</td>\n            <td>Data de emissão da NF do pedido</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>billing_date</b> <br/>string</td>\n            <td>Data de recebimento das informações de faturamento da indústria.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>order_number</b> <br/>string</td>\n            <td>Número do Pedido.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>nf_number</b> <br/>string</td>\n            <td>Número da Nota Fiscal (número / série).</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>freight</b> <br/>float</td>\n            <td>Valor de frete.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>discount</b> <br/>float</td>\n            <td>Valor do desconto financeiro.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>danfe_xml</b> <br/>string</td>\n            <td>Documento XML.\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>danfe_products</b> <br/>Produtos[]</td>\n            <td>Lista de produtos da DANFE.</td>\n            <td></td>\n        </tr>\n    </tbody>\n</table>\n\n<h4>Produtos</h4>\n\n<table class=\"table table-hover\">\n    <thead>\n        <tr>\n            <th>Nome</th>\n            <th>Descrição</th>\n            <th>Exemplo</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td><b>sku</b> <br/>string</td>\n            <td>SKU, Stock Keeping Unit - Unidade de Manutenção de Estoque.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>ean</b> <br/>string</td>\n            <td>EAN do SKU, European Article Number - código de barras padrão.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>dun</b> <br/>string</td>\n            <td>DUN relativo ao SKU, Distribution Unit Number - Número da Unidade de Distribuição.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>description</b> <br/>string</td>\n            <td>Descrição da SKU (ex. Eleve 100 litros).</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>brand</b> <br/>string</td>\n            <td>Marca (ex. Eleve).</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>requested_quantity</b> <br/>integer</td>\n            <td>Quantidade solicitada por SKU.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>billing_quantity</b> <br/>integer</td>\n            <td>Quantidade faturada por SKU.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>unitary_price</b> <br/>float</td>\n                <td>Preço unitário do SKU no pedido cadastrado no 2B.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>billing_unitary_price</b> <br/>float</td>\n                <td>Preço unitário faturado por SKU.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>discount_requested</b> <br/>float</td>\n                <td>Desconto solicitado por SKU no pedido cadastrado no 2B.</td>\n            <td></td>\n        </tr>\n        <tr>\n            <td><b>billing_discount</b> <br/>float</td>\n                <td>Desconto faturado por SKU.</td>\n            <td></td>\n        </tr>\n    </tbody>\n</table>"
+					},
+					"response": [
+						{
+							"name": "201 - Cadastrar DANFE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"industry_cnpj\": \"66.623.550/0001-75\",\r\n    \"industry_name\": \"Vitae Egestas\",\r\n    \"partner_cnpj\": \"68.461.696/0001-97\",\r\n    \"partner_name\": \"Nullam Faucibus\",\r\n    \"order_registration_date\": \"2021-11-17 00:00:00\",\r\n    \"nf_emission_date\": \"2021-11-17 00:00:00\",\r\n    \"billing_date\": \"2021-11-17 00:00:00\",\r\n    \"order_number\": \"23113\",\r\n    \"nf_number\": \"000.001\",\r\n    \"freight\": 234.00,\r\n    \"discount\": 10.0,\r\n    \"danfe_xml\": \"<xml></xml>\",\r\n    \"danfe_products\": [\r\n        {\r\n            \"sku\": \"1.1.001\",\r\n            \"ean\": \"3246548542131\",\r\n            \"dun\": \"26265132132132\",\r\n            \"description\": \"Cras vulputate ipsum et mauris sollicitudin.\",\r\n            \"brand\": \"Curabitur\",\r\n            \"requested_quantity\": 2,\r\n            \"billing_quantity\": 2,\r\n            \"unitary_price\": 50,\r\n            \"billing_unitary_price\": 50,\r\n            \"discount_requested\": 0,\r\n            \"billing_discount\": 0\r\n        },\r\n        {\r\n            \"sku\": \"2.2.002\",\r\n            \"ean\": \"1234651313258\",\r\n            \"dun\": \"13212345615230\",\r\n            \"description\": \"Donec semper, metus et dictum.\",\r\n            \"brand\": \"Cras\",\r\n            \"requested_quantity\": 1,\r\n            \"billing_quantity\": 1,\r\n            \"unitary_price\": 134,\r\n            \"billing_unitary_price\": 134,\r\n            \"discount_requested\": 0,\r\n            \"billing_discount\": 0\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/order/:order_id/danfe",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										":order_id",
+										"danfe"
+									],
+									"variable": [
+										{
+											"key": "order_id",
+											"value": "23",
+											"description": "Identificador único do pedido."
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 18 Nov 2021 12:09:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "9. Listar Status Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"status"
+							]
+						},
+						"description": "<h3>Resposta</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>status_code</b><br>string</td><td>Código de identificação do status (Valor a ser informado na edição de um pedido).</td><td>cod1</td></tr><tr><td><b>status_label</b><br>string</td><td>Título do status</td><td>Cadastro</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Listar Status Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Token de segurança fornecido pelo sistema.",
+										"key": "Authorization",
+										"value": "Bearer 1|5oZ0DqUBk8tHo4HhNQC3GiUJ4DV73zNoqpXePvTg"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"status_code\": \"cod1\",\n        \"status_label\": \"Pedido enviado para Indústria\"\n    },\n    {\n        \"status_code\": \"cod2\",\n        \"status_label\": \"Em análise - Cadastro/Crédito\"\n    },\n    {\n        \"status_code\": \"cod3\",\n        \"status_label\": \"Pedido em Faturamento\"\n    },\n    {\n        \"status_code\": \"cod4\",\n        \"status_label\": \"Envio Liberado\"\n    },\n    {\n        \"status_code\": \"cod5\",\n        \"status_label\": \"Pedido Entregue\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "10. Listar Status Produto Pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/order/products/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"products",
+								"status"
+							]
+						},
+						"description": "<h3>Resposta</h3><table class=\"table table-hover\"><tbody><tr><th>Nome</th><th>Descrição</th><th>Exemplo</th></tr><tr><td><b>status_code</b><br>string</td><td>Código de identificação do status (Valor a ser informado na edição de um produto).</td><td>cod1</td></tr><tr><td><b>status_label</b><br>string</td><td>Título do status</td><td>Produto em Produção</td></tr></tbody></table>"
+					},
+					"response": [
+						{
+							"name": "200 - Listar Status Produto Pedido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/order/products/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"order",
+										"products",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 16 Dec 2021 18:47:04 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.51 (Unix)"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.4.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "388"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"status_code\": \"cod1\",\n        \"status_label\": \"Produto em Produção\"\n    },\n    {\n        \"status_code\": \"cod2\",\n        \"status_label\": \"Em Faturamento\"\n    },\n    {\n        \"status_code\": \"cod3\",\n        \"status_label\": \"Liberado para Envio\"\n    },\n    {\n        \"status_code\": \"cod4\",\n        \"status_label\": \"Não Atendido - Produto sem Estoque\"\n    },\n    {\n        \"status_code\": \"cod5\",\n        \"status_label\": \"Não Atendido - Crédito\"\n    },\n    {\n        \"status_code\": \"cod6\",\n        \"status_label\": \"Entregue\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://seller-hlg.portaldarwin.com.br"
+		},
+		{
+			"key": "token",
+			"value": "234|UzY1NFhC1hwp5TkjdX8P3ZWS6Mq5DGvZQ3KA3lWf"
+		},
+		{
+			"key": "hlg-token",
+			"value": "234|UzY1NFhC1hwp5TkjdX8P3ZWS6Mq5DGvZQ3KA3lWf",
+			"type": "string"
+		},
+		{
+			"key": "prod-token",
+			"value": "13|jrBUDy4HAFABiupagvBHsVaGZVJxhzsyuIjstJLV",
+			"type": "string"
+		}
+	]
+}

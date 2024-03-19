@@ -1,0 +1,25 @@
+
+Plano 2023
+
+1. Criar cluster de stressadores, pensando em:
+
+	- multiplas maquinas
+	- 1 api 
+	- 1 front organizador
+	- colocar os posts de inicio e fim no StresserDotNet
+	- gerar arquivo de report
+
+2. "pedidoFacil" / cloud
+
+	-POC de front end, usando nano 
+	-criar a jornada de pedido rep
+	-usar um bff (backend for frontend) acessando o backend legado
+	-usar cache (por tempo) 
+	-usar lighthouse no novo front, provar melhoras
+	-usar novo estressador, aplicando selenium no novo front
+	-atingir 100+ users em maquina ok
+
+3. "pedidoFacil" / colocation
+
+    -atingir 500+ users em maquina dedicada
+

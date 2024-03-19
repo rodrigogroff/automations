@@ -1,0 +1,13 @@
+
+'Validar preço líquido - A/B/C'
+
+A - Consumo     (Comum            / Difal                       )
+B - Produto     (Industrializado  / Consumo       /   Revenda   )
+C - Orçamento   (Padrão           / Decrescimo                  )
+
+duvidas / problemas atuais:
+
+1 - orçamento com tipo de produto 'Consumo' sempre gera 'difal' no resumo
+2 - orçamento com tipo de produto 'Revenda' sempre gera 'comum' no resumo
+2 - conferencia com a planilha nos itens de consumo e orçamento Decrescimo ainda não sei como chegar aos valores (dif do padrão)
+

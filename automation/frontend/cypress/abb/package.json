@@ -1,0 +1,20 @@
+{
+  "name": "poc2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run",
+    "cy:runH": "npx cypress run --headed --browser firefox"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.3.0",
+    "cypress-localstorage-commands": "^2.2.2",
+    "cypress-wait-until": "^1.7.2",
+    "cypress-xpath": "^2.0.1"
+  }
+}

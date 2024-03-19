@@ -1,0 +1,62 @@
+{
+  "body": {
+    "msg": "Se deseja alterar a quantidade, o valor deve ser menor que a quantidade atual. order_product_id: 15 - Quantidade atual: 2 - Quantidade informada: 2"
+  },
+  "headers": {
+    "date": "Thu, 09 Mar 2023 17:10:11 GMT",
+    "content-type": "application/json",
+    "content-length": "157",
+    "connection": "keep-alive",
+    "server": "Apache/2.4.54 (Debian)",
+    "x-powered-by": "PHP/7.4.33",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "pragma": "no-cache"
+  },
+  "status": 200,
+  "statusText": "OK",
+  "isOkStatusCode": true,
+  "requestHeaders": {
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "user": "admin",
+    "pass": "password",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.3.0 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+    "accept": "application/json",
+    "cookie": "language=pt-br; currency=BRL",
+    "accept-encoding": "gzip, deflate",
+    "content-length": 381
+  },
+  "requestBody": "{\"id\":5,\"status_label\":\"Faturado\",\"status_code\":\"cod3\",\"danfe_xml\":\" 1 2 3\",\"message_reject\":\"\",\"products\":[{\"order_product_id\":\"15\",\"id\":\"50\",\"ean\":\"7898344187869\",\"quantity\":1,\"product_status\":\"cod3\"},{\"order_product_id\":\"15\",\"id\":\"50\",\"ean\":\"7898344187869\",\"quantity\":2,\"product_status\":\"cod2\"},{\"order_product_id\":\"16\",\"id\":\"52\",\"ean\":\"7898594675611\",\"product_status\":\"cod3\"}]}",
+  "duration": 639,
+  "allRequestResponses": [
+    {
+      "Request Body": "{\"id\":5,\"status_label\":\"Faturado\",\"status_code\":\"cod3\",\"danfe_xml\":\" 1 2 3\",\"message_reject\":\"\",\"products\":[{\"order_product_id\":\"15\",\"id\":\"50\",\"ean\":\"7898344187869\",\"quantity\":1,\"product_status\":\"cod3\"},{\"order_product_id\":\"15\",\"id\":\"50\",\"ean\":\"7898344187869\",\"quantity\":2,\"product_status\":\"cod2\"},{\"order_product_id\":\"16\",\"id\":\"52\",\"ean\":\"7898594675611\",\"product_status\":\"cod3\"}]}",
+      "Request Headers": {
+        "Connection": "keep-alive",
+        "Content-Type": "application/json",
+        "user": "admin",
+        "pass": "password",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/12.3.0 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36",
+        "accept": "application/json",
+        "cookie": "language=pt-br; currency=BRL",
+        "accept-encoding": "gzip, deflate",
+        "content-length": 381
+      },
+      "Request URL": "https://mcbauchemie-dev.ecs.com.br/index.php?route=api/integration/updateOrder",
+      "Response Body": {
+        "msg": "Se deseja alterar a quantidade, o valor deve ser menor que a quantidade atual. order_product_id: 15 - Quantidade atual: 2 - Quantidade informada: 2"
+      },
+      "Response Headers": {
+        "date": "Thu, 09 Mar 2023 17:10:11 GMT",
+        "content-type": "application/json",
+        "content-length": "157",
+        "connection": "keep-alive",
+        "server": "Apache/2.4.54 (Debian)",
+        "x-powered-by": "PHP/7.4.33",
+        "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "pragma": "no-cache"
+      },
+      "Response Status": 200
+    }
+  ]
+}

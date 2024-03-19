@@ -1,0 +1,34 @@
+{
+  "order": {
+    "order_id": "4",
+    "address": "Rua Olivia Uebel",
+    "currency": "BRL",
+    "date_added": "2023-03-03 19:03:41",
+    "updated_at": "2023-03-09 19:59:16",
+    "comment": "",
+    "form_payment": "À Vista",
+    "products": [
+      {
+        "order_product_id": "12",
+        "product_id": "62",
+        "ean": "7898344182123",
+        "quantity": "1",
+        "status_product": "Faturado"
+      },
+      {
+        "order_product_id": "13",
+        "product_id": "59",
+        "ean": "7898344181034",
+        "quantity": "1",
+        "status_product": "Faturado"
+      },
+      {
+        "order_product_id": "14",
+        "product_id": "68",
+        "ean": "7898344184400",
+        "quantity": "1",
+        "status_product": "Faturado"
+      }
+    ]
+  }
+}

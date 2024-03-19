@@ -1,0 +1,145 @@
+
+// ----------------------------------------------------------
+// arquivo de comandos básicos do cypress
+// ----------------------------------------------------------
+
+export function get(id) {
+  cy.wait(10);
+  return cy.get(id, { timeout: 930000 });
+}
+
+export function clear(id) {
+  get(id).clear();
+}
+
+export function click(id) {
+  get(id).click();
+}
+
+export function type(id, text, _clear, options) {
+  if (_clear == true)
+    clear(id)
+  get(id).type(text, { timeout: 930000 });
+}
+
+export function typeSlow(id, text) {
+  get(id).type(text, { delay: 200 });
+}
+
+export function typeSlowClear(id, text) {
+  clear(id)
+  get(id).type(text, { delay: 200 });
+}
+
+export function autocomplete(id, text) {
+  cy.log(text)
+  get(id).type(text, { delay: 150 });
+  cy.wait(1000)
+  get(id).type('{enter}');
+}
+
+export function autocompleteSlow(id, text) {
+  get(id)
+    .type(text, { delay: 1500 })
+    .wait(500)
+    .type('{enter}');
+
+  get(id).type('{enter}');
+
+  cy.wait(500);
+}
+
+export function setLocalStorageE2E(key,value){
+  cy.window().then((win) => {
+     win.localStorage.setItem(key,value)
+
+  })
+}
+
+export function checkTable(id, values_check, indexes) {
+  let values = []
+  cy.get(id)
+    .find('td')
+    .each(($el, $index) => {
+      cy.wrap($el)
+        .invoke('text')
+        .then(text => {
+          for (let i = 0; i < indexes.length; i++) {
+            if ($index == indexes[i]) {
+              values.push(text.trim())
+            }
+          }
+        })
+    })
+    .then(() => {
+      expect(values).to.deep.eq(values_check)
+    })
+}
+
+export function getValueFromTable(id, indexTo) {
+  cy.get(id)
+    .find('td')
+    .each(($el, $index) => {
+      cy.wrap($el)
+        .invoke('text')
+        .then(text => {
+          if ($index == indexTo) {
+            return text.trim()
+          }
+        })
+    })
+}
+
+export function checkTextContains(id, text) {
+  get(id).should('include.text', text)
+}
+
+export function checkTextValue(id, text) {
+  get(id).should('have.value', text)
+}
+
+export function wait(ms) {
+  cy.wait(ms);
+}
+
+export function baseUrl() {
+  return Cypress.env('baseUrl')
+}
+
+export function userAdm() {
+  return Cypress.env('user')
+}
+
+export function userAdmPass() {
+  return Cypress.env('pass')
+}
+
+export function selectOption(id, option_text) {
+  get(id).select(option_text);
+}
+
+export function checkSelectOptionSelected(id, text) {
+  get('select' + id + ' option:selected').should('have.text', text)
+}
+
+export function checkUrl(url) {
+  cy.url().should('eq', url)
+}
+
+export function prepareLocalStorage(win, key,value)
+{
+  win.localStorage.setItem(key,value)
+}
+
+export function registerTime(logApi, random_id, my_label)
+{
+  cy.request(
+    { method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      url: logApi + 'regTime',
+      body: { id: random_id, label: my_label } })
+}
+
+export function maxRetries() {
+  return parseInt(Cypress.env('maxRetry'))
+}

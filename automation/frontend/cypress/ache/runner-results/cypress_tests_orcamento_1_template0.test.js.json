@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 1,
+  "passes": 1,
+  "pending": 0,
+  "failures": 0,
+  "start": "2023-09-01T00:09:04.645Z",
+  "duration": 22080,
+  "file": "cypress\\tests\\orcamento\\1\\template0.test.js"
+}
